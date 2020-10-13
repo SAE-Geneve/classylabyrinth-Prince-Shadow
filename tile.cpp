@@ -1,6 +1,9 @@
+#include "tile.h"
+#include "Character.h"
 #include <map>
 #include <cassert>
-#include "tile.h"
+#include<iostream>
+
 
 // An anonymous namespace just here so you cannot access there from somewhere
 // else.
@@ -19,7 +22,6 @@ namespace {
 
 	// Local player stuff.
 	Player local_player{};
-
 	// Map that map space to enemies.
 	std::map<std::pair<int, int>, Enemy> local_enemy;
 
@@ -40,29 +42,30 @@ namespace {
 
 TileType get_tile_at_position(int x, int y)
 {
-	// Get the tile at the location x, y in the world.
-	return (TileType)local_world[xy_local(x, y)];
+							// TODO Get the tile at the location x, y in the world.
+	return (TileType)local_world[xy_local(x,y)];
 }
 
 void set_enemy(Enemy enemy, int x, int y)
 {
-	// Set the location of the enemy.
 	enemy.x = x;
 	enemy.y = y;
 	local_enemy[{x, y}] = enemy;
+		//std::cout << "empty\n";
+		//local_enemy[{x, y}] = '.';
+		//local_enemy[{x, y}] = ;
+		//local_world[xy_local(local_enemy.x, local_enemy.y)] = '.';
 }
 
-Enemy get_enemy(int x, int y)
+Enemy get_enemy( int x, int y)
 {
 	Enemy enemy = local_enemy[{x, y}];
-	// set the local position.
 	enemy.x = x;
 	enemy.y = y;
-	// return the enemy at the position.
 	return enemy;
 }
 
-void set_player(Player player)
+void set_player(Player player, Character hero)
 {
 	// Erase the local player.
 	local_world[xy_local(local_player.x, local_player.y)] = '.';

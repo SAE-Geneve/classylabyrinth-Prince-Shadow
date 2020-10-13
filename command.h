@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tile.h"
+#include "Character.h"
 
 void north();
 void south();
